@@ -1,0 +1,8 @@
+server:
+  port: 1011
+
+info:
+  app:
+    name: "Food-Service Under Production"
+    description: "This is a Production environment, Located in Config Server"
+    version: "1.0V in Production"

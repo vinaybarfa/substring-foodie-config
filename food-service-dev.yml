@@ -1,0 +1,8 @@
+server:
+  port: 1010
+
+info:
+  app:
+    name: "Food-Service under development"
+    description: "This is a development environment, Located in Config Server"
+    version: "1.0V in development"

@@ -1,0 +1,91 @@
+server:
+  port: 9093
+
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: food-service
+              uri: lb://FOOD-SERVICE
+              predicates:
+                - Path=/foods/**
+              filters:
+                - StripPrefix=1
+#              filters:
+#                - RewritePath=/restaurants/(?<remaining>.*), /${remaining}
+            #  RewritePath will change(rewrite) the,  lb://RESTAURANT-SERVICE/foods/api/v1 => lb://RESTAURANT-SERVICE/api/v1  ,it will remove the /foods
+
+            - id: restaurant-service
+              uri: lb://RESTAURANT-SERVICE
+              predicates:       # Predicates check the condition and return true or false
+                - Path=/restaurants/**
+#              filters:          # Filters are used to change(modify) the request and response
+#                - RewritePath=/restaurants/(?<remaining>.*), /${remaining}
+              filters:
+                  - StripPrefix=1
+      discovery:
+        locator:
+          enabled: false   # this will enable(if true) routing of all the services automatically
+    inetutils:
+      preferred-networks:
+        - 127.0.0.1
+#  cloud:
+#    gateway:
+#      routes:
+#        - id: food-service
+#          uri: lb://FOOD-SERVICE
+#          predicates:
+#            - Path=/foods/**
+#          filters:
+#            - RewritePath=/foods/(?<remaining>.*), /$\{remaining}
+#
+#        - id: restaurant-service
+#          uri: lb://RESTAURANT-SERVICE
+#          predicates:
+#            - Path=/restaurants/**
+#          filters:
+#            - RewritePath=/restaurants/(?<remaining>.*), /$\{remaining}
+
+#      server:
+#        webflux:
+#          discovery:
+#            locator:
+#              enabled: false
+
+# configuration of discovery client
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+
+
+# configuration of actuator(use for monitoring)
+management:
+  endpoint:
+    gateway:
+      access: read_only
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: "Api Gateway"
+    description: "This is api gateway for common entry point, Located in Config Server"
+    version: "1.0v"

@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/restaurantdb
+    username: user
+    password: user
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  cloud:
+    inetutils:
+      preferred-networks:
+        - 127.0.0.1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+info:
+  app:
+    name: "Restaurant-Service under Production"
+    description: "This is a Production environment of restaurant service where here your get restaurant information, Located in Config Server"
+    version: "1.05V"

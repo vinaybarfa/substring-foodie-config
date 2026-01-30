@@ -1,0 +1,8 @@
+server:
+  port: 1012
+
+info:
+  app:
+    name: "Food-Service under Testing"
+    description: "This is a Testing environment, Located in Config Server"
+    version: "1.0V in Testing"
