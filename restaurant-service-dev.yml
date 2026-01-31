@@ -31,4 +31,4 @@ info:
   app:
     name: "Restaurant-Service under development"
     description: "This is a development environment of restaurant service where here your get restaurant information, Located in Config Server"
-    version: "1.11V"
+    version: "1.11V in development environment"
