@@ -5,4 +5,4 @@ info:
   app:
     name: "Food-Service Under Production"
     description: "This is a Production environment, Located in Config Server"
-    version: "1.0V in Production"
+    version: "1.2V in Production"
